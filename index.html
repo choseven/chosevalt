@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chosodd</title>
+  <meta name="description" content="The Chosodd Institute HAHAHAHA." />
+  <meta name="keywords" content="research, documentation, minor inconveniences, independent study, open source, academic, institute, chosodd" />
+  <meta property="og:title" content="Chosodd Documentation" />
+  <meta property="og:description" content="An independent research body dedicated to the systematic study your mother." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #100f0c;
+      --paper:  #f2edd8;
+      --paper2: #e9e3c8;
+      --muted:  #7a7060;
+      --rule:   #100f0c;
+      --red:    #b83025;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      opacity: 0;
+      animation: fadein 0.25s ease forwards;
+    }
+
+    @keyframes fadein {
+      to { opacity: 1; }
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      border-bottom: 4px double var(--rule);
+      padding: 0 36px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0 8px;
+      border-bottom: 1px solid rgba(16,15,12,0.2);
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .masthead {
+      text-align: center;
+      padding: 14px 0 10px;
+    }
+
+    .masthead-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.8vw, 18px);
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .masthead-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 7vw, 88px);
+      letter-spacing: 0.06em;
+      line-height: 0.88;
+      display: block;
+    }
+
+    .masthead-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(11px, 1.4vw, 15px);
+      color: var(--muted);
+      display: block;
+      margin-top: 5px;
+    }
+
+    .header-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0 0;
+      border-top: 1px solid rgba(16,15,12,0.2);
+      font-size: 8.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .header-bottom-rule {
+      flex: 1;
+      height: 1px;
+      background: rgba(16,15,12,0.18);
+      margin: 0 12px;
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      display: grid;
+      grid-template-columns: 1px 1.35fr 1px 1fr 1px 1fr 1px;
+      overflow: hidden;
+    }
+
+    .vr { background: rgba(16,15,12,0.15); }
+
+    .col {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow: hidden;
+    }
+
+    /* column 1 — big story */
+    .kicker {
+      font-size: 8px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(22px, 3.2vw, 40px);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .deck {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(12px, 1.4vw, 15px);
+      line-height: 1.55;
+      color: var(--muted);
+      border-top: 1px solid rgba(16,15,12,0.18);
+      padding-top: 10px;
+    }
+
+    .byline {
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .body {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(10.5px, 1.1vw, 13px);
+      line-height: 1.72;
+      color: var(--ink);
+      opacity: 0.88;
+      columns: 2;
+      column-gap: 18px;
+      column-rule: 1px solid rgba(16,15,12,0.12);
+    }
+
+    /* column 2 */
+    .section-rule {
+      border-top: 2px solid var(--rule);
+      padding-top: 12px;
+    }
+
+    .section-label {
+      font-size: 7.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .sub-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(16px, 2vw, 23px);
+      line-height: 1.1;
+    }
+
+    .sub-body {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(10px, 1vw, 12px);
+      line-height: 1.68;
+      color: var(--ink);
+      opacity: 0.82;
+    }
+
+    .pull-quote {
+      border-top: 2px solid var(--rule);
+      border-bottom: 2px solid var(--rule);
+      padding: 12px 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1.6vw, 17px);
+      line-height: 1.45;
+      color: var(--ink);
+      margin-top: 4px;
+    }
+
+    /* column 3 — findings */
+    .findings-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .findings-list li {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(9.5px, 0.95vw, 11.5px);
+      line-height: 1.55;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(16,15,12,0.12);
+      color: var(--ink);
+      opacity: 0.82;
+    }
+
+    .findings-list li span {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 3px;
+    }
+
+    .stamp {
+      margin-top: auto;
+      border: 2.5px solid var(--red);
+      color: var(--red);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      padding: 5px 9px;
+      opacity: 0.5;
+      transform: rotate(-4deg);
+      align-self: flex-start;
+      pointer-events: none;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 3px double var(--rule);
+      padding: 8px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer-pip {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--red);
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div class="header-top">
+      <span></span>
+      <span>Independent · Self-Funded · Peer-Reviewed By No One</span>
+      <span>Warrenton, OR</span>
+    </div>
+    <div class="masthead">
+      <span class="masthead-title">The Official Journal of</span>
+      <span class="masthead-name">CHOSODD</span>
+      <span class="masthead-sub">Wait what was I talking about</span>
+    </div>
+    <div class="header-bottom">
+      <span>Open Access</span>
+      <div class="header-bottom-rule"></div>
+      <span>All Findings Unverified, I forgot to verify them</span>
+      <div class="header-bottom-rule"></div>
+      <span>All inconclusive, as I haven't actually done anything</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="vr"></div>
+
+    <div class="col">
+      <div class="kicker">BREAKING ENWS!</div>
+      <h1 class="headline">Scientists Confirm: You <em>Will</em> go and give me money today</h1>
+      <p class="deck">Study suggests that the person you will be giving money to really wants it.</p>
+      <div class="byline">by me, 1389</div>
+      <p class="body">
+        Discord is NOT FOR DWEEBS (but it actually is)"
+        Think about it, if Big E was dead, he would have told us so.
+      </p>
+    </div>
+
+    <div class="vr"></div>
+
+    <div class="col">
+      <div class="section-rule">
+        <div class="section-label">Ongoing Investigation</div>
+        <h2 class="sub-headline">Triple T is not who we say he is</h2>
+      </div>
+      <p class="sub-body">
+        I know we all love triple T, but we can no longer rely on him as we once have. Tripe T was caught with in a 7/11 without me."
+      </p>
+      <div class="pull-quote">
+        "The bag knows. It has always known."
+        <br><br>— What am I doing with my life
+      </div>
+      <div class="section-rule" style="margin-top:4px;">
+        <div class="section-label">Somethin cool I guess</div>
+        <p class="sub-body">AHAHAHAHAHAHAHAHAHAHAHAHAHAHA, I forgot what to put here.</p>
+      </div>
+    </div>
+
+    <div class="vr"></div>
+
+    <div class="col">
+      <div class="section-rule">
+        <div class="section-label">This Quarter's Findings</div>
+      </div>
+      <ul class="findings-list">
+        <li>
+          <span>SCP 41</span>
+          Thinking disease, contagious anomaly.
+        </li>
+        <li>
+          <span>SCP 42</span>
+          strange object that spontaneously combusts then reforms.
+        </li>
+        <li>
+          <span>SCP 43</span>
+          fungus-like organism that eats a lotta livin things.
+        </li>
+        <li>
+          <span>SCP 44</span>
+          mystery device from WW2.
+        </li>
+        <li>
+          <span>SCP 45</span>
+          "Anomalous effect that alters air properties.
+        </li>
+      </ul>
+      <div class="stamp">FINDINGS: Huh?</div>
+    </div>
+
+    <div class="vr"></div>
+  </main>
+
+  <footer>
+    <div class="footer-text">what · All Rights Loosely Reserved by no one</div>
+    <div class="footer-pip"></div>
+    <div class="footer-text">No findings have been peer reviewed · Several findings are made up</div>
+    <div class="footer-pip"></div>
+    <div class="footer-text">chosodd</div>
+  </footer>
+
+</div>
+
+<!-- JS-disabled crawlers read this clean content -->
+<noscript>
+  <div style="position:fixed;inset:0;background:#f2edd8;padding:60px;font-family:Georgia,serif;font-size:14px;line-height:1.8;color:#100f0c;overflow:auto;z-index:9999;">
+    <strong style="font-size:1.4em;">The Chosodd</strong><br>
+    Yeah cool name I know<br><br>
+    1973.
+    Very cool people.
+  </div>
+</noscript>
+
+<script>
+  window.location.replace('./Assets');
+</script>
+
+</body>
+</html>
